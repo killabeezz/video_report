@@ -1,0 +1,35 @@
+<html>
+<head>
+<script type="text/javascript" src="jquery.js"> </script>
+</head>
+<div id="img_placeholder"></div>
+<body>
+
+
+</body>
+<script type="text/javascript">
+
+function initGroup(name) {
+	$("#img_placeholder").append(
+			"<h1>" + name + "</h1>" +
+			"<img id='" + name + "_img'>" + 
+			"<div align='center'><br>" +
+			"<input type='radio' name='" + name + "' value='orig' checked> Original" +
+			"<input type='radio' name='" + name + "' value='gpu'> GPU" +
+			"<input type='radio' name='" + name + "' value='ffmpeg'> FFMPEG</div><hr>");
+	
+
+	
+	var onSelect=function(val) {
+		$("#" + name + "_img").attr('src', 'img/' + name + "_" + val + ".png");
+	}
+	$("input[name='" + name + "']").on("change", function(){onSelect($(this).val())});
+	onSelect("orig");
+}
+
+initGroup('scene1');
+initGroup('scene2');
+initGroup('scene3');
+</script>
+
+</html>
