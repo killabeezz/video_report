@@ -2,6 +2,14 @@
 <head>
 <script type="text/javascript" src="jquery.js"> </script>
 </head>
+<h1> Videos </h1>
+<h2> Original </h2>
+<video src="video/prepared.h264.mp4" width="640" height="400" controls></video>
+<h2> FFMPEG  </h2>
+<video src="video/prepared.h264.q.run_ffmpeg_odkl.h264.mp4" width="640" height="400" controls></video>
+<h2> GPU </h2>
+<video src="video/prepared.h264.q.run_gpu_g_25.h264.mp4" width="640" height="400" controls></video>
+<hr>
 <div id="img_placeholder"></div>
 <body>
 
@@ -10,6 +18,13 @@
 <script type="text/javascript">
 
 function initGroup(name) {
+	function imgName(val) {
+		return "img/" + name + "_" + val + ".png";
+	}
+	// preload images
+	$('<img/>')[0].src = imgName('orig');
+	$('<img/>')[0].src = imgName('gpu');
+	$('<img/>')[0].src = imgName('ffmpeg');
 	$("#img_placeholder").append(
 			"<h1>" + name + "</h1>" +
 			"<img id='" + name + "_img'>" + 
@@ -21,7 +36,7 @@ function initGroup(name) {
 
 	
 	var onSelect=function(val) {
-		$("#" + name + "_img").attr('src', 'img/' + name + "_" + val + ".png");
+		$("#" + name + "_img").attr('src', imgName(val));
 	}
 	$("input[name='" + name + "']").on("change", function(){onSelect($(this).val())});
 	onSelect("orig");
